@@ -1,0 +1,23 @@
+{
+  "name": "storageman",
+  "description": "storageman",
+  "main": "dist/storageman.min.js",
+  "authors": ["SJ <souljungkim@gmail.com>"],
+  "license": "MIT",
+  "keywords": ["storageman", "localstorage"],
+  "homepage": "https://github.com/souljungkim/storageman",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower.json",
+    "gulpfile.js",
+    "package.json",
+    "src",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "crossman": "*"
+  }
+}
