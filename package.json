@@ -7,8 +7,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/souljungkim/storageman.git",
-    "web": "https://github.com/souljungkim/storageman"
+    "url": "https://github.com/sj-js/storageman.git",
+    "web": "https://github.com/sj-js/storageman"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
