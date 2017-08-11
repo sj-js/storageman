@@ -1,7 +1,7 @@
 {
   "name": "storageman",
   "description": "storageman",
-  "main": "dist/storageman.min.js",
+  "main": "dist/js/storageman.min.js",
   "authors": ["SJ <souljungkim@gmail.com>"],
   "license": "MIT",
   "keywords": ["storageman", "localstorage"],
