@@ -1,22 +1,49 @@
-/****************************************************************************************************
- *  StorageMan
- *  Created By sujkim
- ****************************************************************************************************/
-
 function StorageMan(){
 }
+
+/***************************************************************************
+ * [Node.js] exports
+ ***************************************************************************/
+try {
+    module.exports = exports = StorageMan;
+} catch (e) {}
+
+
+
+/****************************************************************************************************
+ *
+ *  LocalStorage
+ *
+ ****************************************************************************************************/
 StorageMan.prototype.get = function(key){
     var val = this.getString(key);
     if (val && (val.indexOf('[') == 0 || val.indexOf('{') == 0))
         return JSON.parse(val);
+    if (val == 'true')
+        return true;
+    if (val == 'false')
+        return false;
     return val;
 };
 StorageMan.prototype.getString = function(key){
     return localStorage.getItem(key);
 };
+
+//TODO:임의로 고침. => 나중에 정식빌드해서 min.js로 나오도록 하기.
+StorageMan.prototype.getBoolean = function(key){
+    var val = this.getString(key);
+    // - FALSE = null or false or Any Characters,
+    // - TRUE = true or 'true'
+    return (val && (val == true || val == 'true'));
+};
 StorageMan.prototype.getObj = function(key){
     var val = this.getString(key);
     return JSON.parse(val);
+};
+StorageMan.prototype.parse = StorageMan.prototype.getObj;
+StorageMan.prototype.nvl = function(key, nvlData){
+    var data = this.get(key);
+    return data == null ? nvlData : data;
 };
 StorageMan.prototype.set = function(key, val){
     if (typeof val == 'string' || typeof val == 'number'){
@@ -25,12 +52,27 @@ StorageMan.prototype.set = function(key, val){
         localStorage.setItem(key, JSON.stringify(val));
     }
 };
+StorageMan.prototype.add = function(key, val, limitLength){
+    //Check before data
+    var listItem = this.get(key);
+    //Push data
+    if (listItem && listItem instanceof Array && listItem.length > 0){
+        listItem.push(val);
+    }else{
+        listItem = [val];
+    }
+    //Check Limit Length
+    if (limitLength && listItem.length > limitLength){
+        var targetLengthToDelete = (listItem.length - limitLength);
+        listItem.splice(0, targetLengthToDelete);
+    }
+    //Save to LocalStorage
+    this.set(key, listItem);
+    return listItem;
+};
 StorageMan.prototype.remove = function(key){
     localStorage.removeItem(key);
 };
-
-
-
 
 
 
